@@ -1,6 +1,22 @@
 --
 --           Задача 1 
 --
+CREATE TABLE departments
+(
+    id   INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(40)  NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE employees
+(
+    id            INT(11) NOT NULL AUTO_INCREMENT,
+    name          VARCHAR(40)  NOT NULL,
+    salary        INT(11) NOT NULL,
+    department_id INT(11) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (department_id) REFERENCES departments (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 SELECT departments.name, MAX(employees.salary) as salary
 FROM departments
@@ -11,6 +27,16 @@ GROUP BY departments.id;
 --
 --           Задача 2
 --
+
+CREATE TABLE employees
+(
+  id         INT(11) NOT NULL AUTO_INCREMENT,
+  name       VARCHAR(40)  NOT NULL,
+  salary     INT(11) NOT NULL,
+  manager_id INT(11) DEFAULT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (manager_id) REFERENCES employees (id) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
 
 SELECT employees.name
 FROM employees
